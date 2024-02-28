@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_17/local/cache.dart';
+import 'package:flutter_application_17/screens/login_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text("${Cache.getName()}"),
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            onPressed: (){
+              Cache.deleteAll();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            }, 
+            icon: Icon(Icons.exit_to_app),
+          )
+        ],
       ),
       body: Center(
         child: Column(
